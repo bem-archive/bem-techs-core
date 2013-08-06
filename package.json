@@ -1,0 +1,27 @@
+{
+  "name": "bem-techs-core",
+  "version": "1.0.0",
+  "description": "Core bem tech modules",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/diunko/bem-techs-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/diunko/bem-techs-core/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0",
+    "chai": "~1.7.2",
+    "bem-smoke": "~0.2.0",
+    "bem": "git://github.com/bem/bem-tools.git#8434c6e"
+  },
+  "peerDependencies": {
+    "bem": ">= 0.6.0"
+  },
+  "dependencies": {
+    "ym": "0.0.9"
+  }
+}
