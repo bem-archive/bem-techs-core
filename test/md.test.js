@@ -4,7 +4,7 @@ describe('md tech', function() {
     var tech;
     
     beforeEach(function() {
-        tech = BEMSmoke.testTech(require.resolve('../lib/md'));
+        tech = BEMSmoke.testTech(require.resolve('../techs/md'));
     });
 
     it('should create russian and english files by default', function(done) {

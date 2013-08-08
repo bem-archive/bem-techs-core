@@ -3,7 +3,7 @@ var BEMSmoke = require('bem-smoke');
 describe('vanilla.js tech', function() {
     var tech;
     beforeEach(function() {
-        tech = BEMSmoke.testTech(require.resolve('../lib/vanilla.js.js'))
+        tech = BEMSmoke.testTech(require.resolve('../techs/vanilla.js.js'))
                        .withTechMap({
                            'js': require.resolve('bem/lib/techs/v2/js.js')
                        });

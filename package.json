@@ -15,13 +15,17 @@
   "devDependencies": {
     "mocha": "~1.12.0",
     "chai": "~1.7.2",
-    "bem-smoke": "~0.2.0",
-    "bem": "git://github.com/bem/bem-tools.git#8434c6e"
+    "bem-smoke": "git://github.com/bem/bem-smoke.git#8cd56797d2",
+    "bem": "git://github.com/bem/bem-tools.git#8434c6e",
+    "sinon": "~1.7.3",
+    "sinon-chai": "~2.4.0"
   },
   "peerDependencies": {
     "bem": ">= 0.6.0"
   },
   "dependencies": {
-    "ym": "0.0.9"
+    "ym": "0.0.9",
+    "bemhtml-compat": "0.0.10",
+    "bem-xjst": "~0.3.1"
   }
 }

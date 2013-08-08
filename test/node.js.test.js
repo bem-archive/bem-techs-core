@@ -4,10 +4,10 @@ describe('node.js tech', function() {
     var tech;
 
     beforeEach(function() {
-        tech = BEMSmoke.testTech(require.resolve('../lib/node.js.js'))
+        tech = BEMSmoke.testTech(require.resolve('../techs/node.js.js'))
                        .withTechMap({
                            'js': require.resolve('bem/lib/techs/v2/js.js'),
-                           'vanilla.js': require.resolve('../lib/vanilla.js.js')
+                           'vanilla.js': require.resolve('../techs/vanilla.js.js')
                        });
     }); 
 
