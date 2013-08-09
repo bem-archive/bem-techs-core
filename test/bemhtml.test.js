@@ -1,10 +1,7 @@
 var sinon = require('sinon'),
-    chai = require('chai'),
+    expect = require('chai').expect,
     BEMSmoke = require('bem-smoke');
 
-
-chai.use(require('sinon-chai'));
-var expect = chai.expect;
 
 describe('bemhtml.js tech', function() {
     var tech;
