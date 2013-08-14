@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Core bem tech modules",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test-watch": "mocha --watch"
   },
   "repository": {
     "type": "git",
@@ -15,13 +16,13 @@
   "devDependencies": {
     "mocha": "~1.12.0",
     "chai": "~1.7.2",
-    "bem-smoke": "git://github.com/bem/bem-smoke.git#26111382f6",
-    "bem": "git://github.com/bem/bem-tools.git#8434c6e",
+    "bem-smoke": "git://github.com/bem/bem-smoke.git#3f89e45a9def",
+    "bem": "~0.6.15",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0"
   },
   "peerDependencies": {
-    "bem": ">= 0.6.0"
+    "bem": "~0.6.15"
   },
   "dependencies": {
     "ym": "0.0.9",

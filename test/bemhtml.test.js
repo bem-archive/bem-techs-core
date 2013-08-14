@@ -252,7 +252,7 @@ describe('bemhtml.js tech', function() {
                 ]
             })
             .asserts(function() {
-                expect(mockCompat.transpile).not.to.have.been.called();
+                expect(mockCompat.transpile).not.to.have.been.called;
             })
             .notify(done);
         });
