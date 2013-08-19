@@ -1,5 +1,7 @@
 # Bem Core Tech Modules
 
+[![Build Status](https://travis-ci.org/bem/bem-techs-core.png)](https://travis-ci.org/bem/bem-techs-core)
+
 A set of core technology modules not included in [bem-tools](https://github.com/bem/bem-tools) distribution.
 
 ## Technologies included
