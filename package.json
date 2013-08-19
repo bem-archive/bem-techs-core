@@ -4,14 +4,14 @@
   "description": "Core bem tech modules",
   "main": "index.js",
   "contributors": [
-    "Dmitry Filatov <dfilatov@yandex-team.ru>"
-    "Dmitry Unkovsky <oil.crayons@gmail.com>"
-    "Fedor Indutny <fedor.indutny@gmail.com>"
-    "Misha Berezin <mishaberezin@gmail.com>"
-    "Sergey Belov <peimei@ya.ru>"
-    "Sergey Berezhnoy <veged@mail.ru>"
-    "Sergey Tatarintsev <sevinf@yandex-team.ru>"
-    "Vladimir Grinenko <i@tadatuta.com>"
+    "Dmitry Filatov <dfilatov@yandex-team.ru>",
+    "Dmitry Unkovsky <oil.crayons@gmail.com>",
+    "Fedor Indutny <fedor.indutny@gmail.com>",
+    "Misha Berezin <mishaberezin@gmail.com>",
+    "Sergey Belov <peimei@ya.ru>",
+    "Sergey Berezhnoy <veged@mail.ru>",
+    "Sergey Tatarintsev <sevinf@yandex-team.ru>",
+    "Vladimir Grinenko <i@tadatuta.com>",
     "Vladimir Varankin <nek.narqo+git@gmail.com>"
   ],
   "scripts": {
