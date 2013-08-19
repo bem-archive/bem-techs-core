@@ -1,18 +1,29 @@
 {
   "name": "bem-techs-core",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Core bem tech modules",
   "main": "index.js",
+  "contributors": [
+    "Dmitry Filatov <dfilatov@yandex-team.ru>"
+    "Dmitry Unkovsky <oil.crayons@gmail.com>"
+    "Fedor Indutny <fedor.indutny@gmail.com>"
+    "Misha Berezin <mishaberezin@gmail.com>"
+    "Sergey Belov <peimei@ya.ru>"
+    "Sergey Berezhnoy <veged@mail.ru>"
+    "Sergey Tatarintsev <sevinf@yandex-team.ru>"
+    "Vladimir Grinenko <i@tadatuta.com>"
+    "Vladimir Varankin <nek.narqo+git@gmail.com>"
+  ],
   "scripts": {
     "test": "mocha",
     "test-watch": "mocha --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/diunko/bem-techs-core.git"
+    "url": "git://github.com/bem/bem-techs-core.git"
   },
   "bugs": {
-    "url": "https://github.com/diunko/bem-techs-core/issues"
+    "url": "https://github.com/bem/bem-techs-core/issues"
   },
   "devDependencies": {
     "mocha": "~1.12.0",
@@ -28,7 +39,19 @@
   "dependencies": {
     "ym": "0.0.9",
     "bemhtml-compat": "0.0.10",
-    "bem-xjst": "~0.3.1",
-    "bem-environ": "~1.2.0"
-  }
+    "bem-xjst": "~0.3.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "bem",
+    "bem-core",
+    "techs",
+    "bemhtml",
+    "vanilla.js",
+    "browser.js",
+    "vanilla.js"
+  ],
+  "license": "MIT"
 }
