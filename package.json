@@ -2,6 +2,7 @@
   "name": "bem-techs-core",
   "version": "1.0.0",
   "description": "Core bem tech modules",
+  "main": "index.js",
   "scripts": {
     "test": "mocha",
     "test-watch": "mocha --watch"
