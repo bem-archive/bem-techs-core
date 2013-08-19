@@ -25,14 +25,14 @@ A set of core technology modules not included in [bem-tools](https://github.com/
 2.  Configure your `level.js` to use technologies from a package:
 
     ```javascript
-    var coreTechs = require('bem-core-techs')
+    var coreTechs = require('bem-techs-core');
 
     exports.getTechs = function() {
         return {
             //your setup code
             'bemhtml': coreTechs.resolveTech('bemhtml'),
             'vanilla.js': coreTechs.resolveTech('vanilla.js')
-        }
+        };
     };
     ```
 
