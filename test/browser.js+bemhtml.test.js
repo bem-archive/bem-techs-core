@@ -1,3 +1,5 @@
+'use strict';
+
 var BEMSmoke = require('bem-smoke');
 
 describe('browser.js+bemhtml tech', function() {
@@ -58,8 +60,8 @@ describe('browser.js+bemhtml tech', function() {
                          '/* block/block.browser.js: end */ /**/',
                          '',
                          '',
-                         'compiled:', 
-                         '', 
+                         'compiled:',
+                         '',
                          '/* begin: block/block.bemhtml.xjst */',
                          'bemhtml',
                          '/* end: block/block.bemhtml.xjst */',

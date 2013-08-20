@@ -1,3 +1,5 @@
+'use strict';
+
 var PATH = require('path'),
     BEM = require('bem'),
     Q = BEM.require('q'),
@@ -31,7 +33,7 @@ exports.techMixin = {
         return this.getBuildResultChunk(ymRelPath, ymPath);
     },
 
-    getBuildResult : function(files, suffix, output, opts) {
+    getBuildResult : function(files, suffix, output) {
         return Q.all([
                 this.getYmChunk(output),
                 this.__base.apply(this, arguments)

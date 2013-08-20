@@ -1,7 +1,6 @@
-var BEM = require('bem'),
-    Q = BEM.require('q'),
-    PATH = require('path'),
-    compat = require('bemhtml-compat');
+'use strict';
+
+var compat = require('bemhtml-compat');
 
 exports.API_VER = 2;
 
@@ -40,8 +39,8 @@ exports.techMixin = {
 
         var BEMHTML = require('../lib/bemhtml');
         return BEMHTML.translate(sources, {
-                devMode : process.env.BEMHTML_ENV == 'development',
-                cache   : process.env.BEMHTML_CACHE == 'on',
+                devMode : process.env.BEMHTML_ENV === 'development',
+                cache   : process.env.BEMHTML_CACHE === 'on',
                 exportName : 'BEMHTML'
             });
     }

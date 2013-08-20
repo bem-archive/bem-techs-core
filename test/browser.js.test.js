@@ -1,3 +1,5 @@
+'use strict';
+
 var BEMSmoke = require('bem-smoke');
 
 describe('browser.js tech', function() {

@@ -1,3 +1,5 @@
+'use strict';
+
 var BEMSmoke = require('bem-smoke');
 
 describe('md tech', function() {

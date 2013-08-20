@@ -1,3 +1,5 @@
+'use strict';
+
 var BEM = require('bem'),
     Q = BEM.require('q'),
     VM = require('vm');
@@ -11,6 +13,7 @@ exports.techMixin = {
             .then(function(c) {
                 /** @name BEMHTML variable appears after runInThisContext() call */
                 VM.runInThisContext(c, path);
+                /*globals BEMHTML:true*/
                 return BEMHTML;
             });
 
@@ -43,7 +46,7 @@ exports.techMixin = {
 
     },
 
-    storeCreateResult: function(path, suffix, res, force) {
+    storeCreateResult: function(path, suffix, res) {
         // always overwrite html files
         return this.__base(path, suffix, res, true);
     },

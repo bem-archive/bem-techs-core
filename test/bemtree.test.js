@@ -1,3 +1,5 @@
+'use strict';
+
 var BEMSmoke = require('bem-smoke'),
     expect = require('chai').expect,
     sinon = require('sinon');

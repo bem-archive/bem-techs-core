@@ -1,3 +1,5 @@
+'use strict';
+
 var BEMSmoke = require('bem-smoke');
 
 describe('node.js tech', function() {
@@ -9,7 +11,7 @@ describe('node.js tech', function() {
                            'js': require.resolve('bem/lib/techs/v2/js.js'),
                            'vanilla.js': require.resolve('../techs/vanilla.js.js')
                        });
-    }); 
+    });
 
     it('should add ym import to the base tech build result', function(done) {
         tech.withSourceFiles({

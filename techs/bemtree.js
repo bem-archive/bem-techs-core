@@ -1,3 +1,5 @@
+'use strict';
+
 exports.baseTechPath = require.resolve('./bemhtml.js');
 
 exports.techMixin = {
@@ -17,7 +19,7 @@ exports.techMixin = {
 
         var BEMHTML = require('../lib/bemhtml');
         return BEMHTML.translate(sources, {
-                devMode : process.env.BEMTREE_ENV == 'development',
+                devMode : process.env.BEMTREE_ENV === 'development',
                 exportName : 'BEMTREE'
             });
     }

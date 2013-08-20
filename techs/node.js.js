@@ -1,3 +1,5 @@
+'use strict';
+
 exports.baseTechName = 'vanilla.js';
 
 exports.techMixin = {
@@ -22,15 +24,15 @@ exports.techMixin = {
 
     getYmChunk : function() {
         return [
-            "if(typeof module !== 'undefined') {",
-            "modules = require('ym');",
-            "}\n"
+            'if(typeof module !== "undefined") {',
+            'modules = require("ym");',
+            '}\n'
         ].join('');
     },
 
     getBuildResult : function(files, suffix, output, opts) {
         var ymChunk = this.getYmChunk();
-        return this.__base.apply(this, arguments)
+        return this.__base.apply(files, suffix, output, opts)
             .then(function(res) {
                 return [ymChunk].concat(res);
             });

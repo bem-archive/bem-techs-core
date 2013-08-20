@@ -1,3 +1,5 @@
+'use strict';
+/*jshint expr:true*/
 var sinon = require('sinon'),
     expect = require('chai').expect,
     BEMSmoke = require('bem-smoke');
@@ -23,11 +25,11 @@ describe('bemhtml.js tech', function() {
         it('produces bemhtml files for block', function(done) {
             tech.withSourceFiles({
                 'block': {
-                    'block.bemhtml.xjst': 'block' 
+                    'block.bemhtml.xjst': 'block'
                 }
             })
             .build('/out', {
-                deps: [ 
+                deps: [
                     {block: 'block'}
                 ]
             })
@@ -45,14 +47,14 @@ describe('bemhtml.js tech', function() {
         it('produces bemhtml files for multiple blocks', function(done) {
             tech.withSourceFiles({
                 'block1': {
-                    'block1.bemhtml.xjst': 'block1' 
+                    'block1.bemhtml.xjst': 'block1'
                 },
                 'block2': {
-                    'block2.bemhtml.xjst': 'block2' 
+                    'block2.bemhtml.xjst': 'block2'
                 }
             })
             .build('/out', {
-                deps: [ 
+                deps: [
                     {block: 'block1'},
                     {block: 'block2'}
                 ]
@@ -82,7 +84,7 @@ describe('bemhtml.js tech', function() {
                 }
             })
             .build('/out', {
-                deps: [ 
+                deps: [
                     {block: 'block'},
                     {block: 'block', mod: 'mod', val: 'val'}
                 ]
@@ -112,7 +114,7 @@ describe('bemhtml.js tech', function() {
                 }
             })
             .build('/out', {
-                deps: [ 
+                deps: [
                     {block: 'block'},
                     {block: 'block', elem: 'elem'}
                 ]
@@ -140,13 +142,13 @@ describe('bemhtml.js tech', function() {
                     '__elem': {
                         'block__elem.bemhtml.xjst': 'block, elem',
                         '_mod': {
-                            'block__elem_mod_val.bemhtml.xjst': 'block, elem, mod=val' 
+                            'block__elem_mod_val.bemhtml.xjst': 'block, elem, mod=val'
                         }
                     }
                 }
             })
             .build('/out', {
-                deps: [ 
+                deps: [
                     {block: 'block'},
                     {block: 'block', elem: 'elem'},
                     {block: 'block', elem: 'elem', mod: 'mod', val: 'val'}

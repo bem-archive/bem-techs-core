@@ -1,7 +1,7 @@
-var PATH = require('path'),
-    BEM = require('bem'),
-    Template = BEM.require('./template'),
-    Q = BEM.require('q');
+'use strict';
+
+var BEM = require('bem'),
+    Template = BEM.require('./template');
 
 exports.baseTechName = 'js';
 
@@ -24,6 +24,7 @@ exports.techMixin = {
     },
 
     getCreateResult : function(path, suffix, vars) {
+        /*jshint expr:true*/
         var moduleName = vars.BlockName;
         vars.ElemName &&
             (moduleName += '__' + vars.ElemName);
@@ -34,12 +35,12 @@ exports.techMixin = {
         vars.ModuleName = moduleName;
 
         return Template.process([
-            "/*global modules:false */",
-            "",
-            "modules.define('{{bemModuleName}}', function(provide) {",
-            "",
-            "});",
-            ""
+            '/*global modules:false */',
+            '',
+            'modules.define("{{bemModuleName}}", function(provide) {',
+            '',
+            '});',
+            ''
         ], vars);
     }
 
