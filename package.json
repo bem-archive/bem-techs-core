@@ -28,7 +28,7 @@
   "devDependencies": {
     "mocha": "~1.12.0",
     "chai": "~1.7.2",
-    "bem-smoke": "git://github.com/bem/bem-smoke.git#4403a8f51942",
+    "bem-smoke": "~0.3.0",
     "bem": "~0.6.15",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
