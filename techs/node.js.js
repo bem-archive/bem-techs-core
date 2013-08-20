@@ -32,7 +32,7 @@ exports.techMixin = {
 
     getBuildResult : function(files, suffix, output, opts) {
         var ymChunk = this.getYmChunk();
-        return this.__base.apply(files, suffix, output, opts)
+        return this.__base(files, suffix, output, opts)
             .then(function(res) {
                 return [ymChunk].concat(res);
             });

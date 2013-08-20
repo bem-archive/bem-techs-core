@@ -25,7 +25,7 @@ describe('node.js tech', function() {
             ]
         })
         .producesFile('/out.node.js')
-        .withContent('if(typeof module !== \'undefined\') {modules = require(\'ym\');}',
+        .withContent('if(typeof module !== "undefined") {modules = require("ym");}',
                      '/* block/block.node.js: begin */ /**/',
                      '//node;',
                      '/* block/block.node.js: end */ /**/',

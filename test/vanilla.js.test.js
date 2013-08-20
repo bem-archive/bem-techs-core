@@ -17,7 +17,7 @@ describe('vanilla.js tech', function() {
             .producesFile(params.expectedFile)
             .withContent('/*global modules:false */',
                          '',
-                         'modules.define(\'' + params.expectedId + '\', function(provide) {',
+                         'modules.define("' + params.expectedId + '", function(provide) {',
                          '',
                          '});',
                          '',
