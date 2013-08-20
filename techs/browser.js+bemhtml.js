@@ -1,61 +1,47 @@
 var BEM = require('bem'),
     Q = BEM.require('q');
 
-exports.baseTechName = 'browser.js';
+
+exports.API_VER = 2;
 
 exports.techMixin = {
 
-    getBuildResults: function(decl, levels, output, opts) {
-        var _this = this;
-
-        return this.__base(decl, levels, output, opts)
-            .then(function(res) {
-
-                return _this.concatBemhtml(res, output, opts)
-                    .then(function() {
-                        return res;
-                    });
-
-            });
+    getBuildSuffixesMap: function() {
+        return {
+            'js': ['vanilla.js', 'js', 'browser.js', 'bemhtml', 'bemhtml.xjst']
+        };
     },
 
-    concatBemhtml: function(res, output, opts) {
-        var _this = this,
-            context = this.context,
-            declaration = context.opts.declaration;
+    getTechBuildResults: function(techName, decl, output, opts) {
+        opts = Object.create(opts);
+        opts.force = true;
+        var tech = this.context.createTech(techName);
+        return tech.getBuildResults(decl, this.context.getLevels(), output, opts);
 
-        return declaration
+    },
+
+    getBuildResult: function(files, suffix, output, opts) {
+        var _this = this;
+        return this.context.opts.declaration
             .then(function(decl) {
+                var browserJsResults = _this.getTechBuildResults('browser.js', decl, output, opts);
 
-                decl = decl.depsByTechs;
+                if (!decl.depsByTechs || ! decl.depsByTechs.js) {
+                    return browserJsResults;
+                }
 
-                if (!decl || !decl.js || !decl.js.bemhtml) return;
+                var bemhtmlDecl = {
+                    deps: decl.depsByTechs.js.bemhtml
+                };
 
-                decl = { deps: decl.js.bemhtml };
+                var bemhtmlResults = _this.getTechBuildResults('bemhtml', bemhtmlDecl, output, opts);
 
-                var bemhtmlTech = context.createTech('bemhtml');
-
-                if (bemhtmlTech.API_VER !== 2) return Q.reject(new Error(_this.getTechName() +
-                    ' can’t use v1 bemhtml tech to concat bemhtml content. Configure level to use v2 bemhtml.'));
-
-                var bemhtmlResults = bemhtmlTech.getBuildResults(
-                        decl,
-                        context.getLevels(),
-                        output,
-                        opts
-                    );
-
-                return bemhtmlResults
-                    .then(function(r) {
-
-                        // put bemhtml templates at the bottom of builded js file
-                        Object.keys(res).forEach(function(suffix) {
-                            // test for array as in i18n.js+bemhtml tech
-                            // there's hack to create symlink for default lang
-                            // so 'js' key is a string there
-                            Array.isArray(res[suffix]) && res[suffix].push(r['bemhtml.js']);
-                        });
-
+                return Q.all([browserJsResults, bemhtmlResults])
+                    .spread(function(browserJs, bemhtml) {
+                        return [
+                            browserJs.js.join(''),
+                            bemhtml['bemhtml.js']
+                        ].join('\n');
                     });
 
             });

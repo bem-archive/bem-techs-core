@@ -57,6 +57,7 @@ describe('browser.js+bemhtml tech', function() {
                          '//js;',
                          '/* block/block.browser.js: end */ /**/',
                          '',
+                         '',
                          'compiled:', 
                          '', 
                          '/* begin: block/block.bemhtml.xjst */',
@@ -80,7 +81,7 @@ describe('browser.js+bemhtml tech', function() {
                 .notify(done);
         });
 
-        it.skip('rebuilds out file when bemhtml source changed', function(done) {
+        it('rebuilds out file when bemhtml source changed', function(done) {
             tech.touchFile('/block/block.bemhtml.xjst')
                 .build('/out', decl)
                 .writesToFile('/out.js')
