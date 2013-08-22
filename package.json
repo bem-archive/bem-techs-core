@@ -1,6 +1,6 @@
 {
   "name": "bem-techs-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Core bem tech modules",
   "main": "index.js",
   "contributors": [
