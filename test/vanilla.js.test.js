@@ -93,7 +93,7 @@ describe('vanilla.js tech', function() {
                     {block: 'block', elem: 'elem'}
                 ]
             })
-            .producesFile('/out.vanilla.js')
+            .producesFile('/out.js')
             .withContent('/* block/block.vanilla.js: begin */ /**/',
                          '//block;',
                          '/* block/block.vanilla.js: end */ /**/',

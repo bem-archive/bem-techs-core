@@ -1,5 +1,4 @@
 'use strict';
-
 var BEM = require('bem'),
     Template = BEM.require('./template');
 
@@ -7,20 +6,10 @@ exports.baseTechName = 'js';
 
 exports.techMixin = {
 
-    getSuffixes : function() {
-        return ['vanilla.js'];
-    },
-
-    getBuildSuffixes : function() {
-        return ['vanilla.js'];
-    },
-
     getBuildSuffixesMap : function() {
-        return this.getSuffixes()
-            .reduce(function(map, suffix) {
-                map[suffix] = [suffix];
-                return map;
-            }, {});
+        return {
+            'js':['vanilla.js']
+        };
     },
 
     getCreateResult : function(path, suffix, vars) {

@@ -6,17 +6,15 @@ describe('browser.js+bemhtml tech', function() {
     var tech;
     var decl = {
         deps: [
-            {block: 'block'}
-        ],
-
-        depsByTechs: {
-            js: {
-                bemhtml: [
-                    {block: 'block'}
+            {block: 'block'},
+            {
+                block: 'block',
+                tech: 'js',
+                shouldDeps: [
+                    {block: 'block', tech: 'bemhtml'}
                 ]
-                
             }
-        }
+        ]
     };
 
     beforeEach(function() {
@@ -59,12 +57,12 @@ describe('browser.js+bemhtml tech', function() {
                          '//js;',
                          '/* block/block.browser.js: end */ /**/',
                          '',
-                         '',
                          'compiled:',
                          '',
                          '/* begin: block/block.bemhtml.xjst */',
                          'bemhtml',
                          '/* end: block/block.bemhtml.xjst */',
+                         '',
                          '')
             .notify(done);
     });

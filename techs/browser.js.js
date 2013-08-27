@@ -1,35 +1,45 @@
 'use strict';
-
 var PATH = require('path'),
     BEM = require('bem'),
     Q = BEM.require('q'),
-    ymPath = require.resolve('ym');
+    ymPath = require.resolve('ym'),
+    Deps = require('bem/lib/techs/v2/deps.js').Deps;
 
 exports.baseTechName = 'vanilla.js';
 
 exports.techMixin = {
 
-    getSuffixes : function() {
-        return ['vanilla.js', 'browser.js', 'js'];
+    transformBuildDecl: function(decl) {
+        var ss = this.getWeakSuffixesMap();
+
+        return decl
+            .then(function(decl){
+                var deps = new Deps().parseDepsDecl(decl)
+                    .filter(function(dependson) {
+                        return ((dependson.item.tech in ss) || (!dependson.item.tech));
+                    }).map(function(item){
+                        return item.item;
+                    });
+                return {deps: deps};
+            });
     },
+
+    getWeakBuildSuffixesMap:function(){
+        return { 'js' : ['vanilla.js', 'browser.js', 'js'] };
+    },
+
+    getBuildSuffixesMap:function(){
+        return { 'js' : ['browser.js', 'js'] };
+    },
+    
 
     getCreateSuffixes : function() {
         return ['browser.js'];
     },
 
-    getBuildSuffixes : function() {
-        return ['js'];
-    },
-
-    getBuildSuffixesMap : function() {
-        return {
-            'js' : this.getSuffixes()
-        };
-    },
-
     getYmChunk : function(output) {
-        var outputDir = PATH.resolve(output, '..'),
-            ymRelPath = PATH.relative(outputDir, ymPath);
+        var outputDir = PATH.resolve(output, '..');
+        var ymRelPath = PATH.relative(outputDir, ymPath);
         return this.getBuildResultChunk(ymRelPath, ymPath);
     },
 

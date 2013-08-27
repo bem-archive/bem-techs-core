@@ -1,15 +1,12 @@
 'use strict';
-
 var compat = require('bemhtml-compat');
 
 exports.API_VER = 2;
 
 exports.techMixin = {
 
-    getBuildSuffixesMap: function() {
-        return {
-            'bemhtml.js': ['bemhtml', 'bemhtml.xjst']
-        };
+    getBuildSuffixesMap : function() {
+        return { 'bemhtml.js' : ['bemhtml', 'bemhtml.xjst'] };
     },
 
     getCreateSuffixes : function() {
@@ -29,9 +26,8 @@ exports.techMixin = {
     },
 
     getBuildResult : function(files, suffix, output, opts) {
-        var _t = this;
         return this.__base(files, suffix, output, opts)
-            .then(_t.getCompiledResult.bind(_t));
+            .then(this.getCompiledResult.bind(this));
     },
 
     getCompiledResult : function(sources) {

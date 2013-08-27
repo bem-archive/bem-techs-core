@@ -1,10 +1,7 @@
 'use strict';
-
 var BEM = require('bem'),
     Q = BEM.require('q'),
     VM = require('vm');
-
-exports.API_VER = 2;
 
 exports.techMixin = {
 
@@ -13,9 +10,9 @@ exports.techMixin = {
         var path = this.getPath(prefix, 'bemhtml.js');
         return BEM.util.readFile(path)
             .then(function(c) {
+                /*globals BEMHTML:true*/
                 /** @name BEMHTML variable appears after runInThisContext() call */
                 VM.runInThisContext(c, path);
-                /*globals BEMHTML:true*/
                 return BEMHTML;
             });
 
