@@ -17,7 +17,7 @@ describe('browser.js+bemhtml tech', function() {
         ]
     };
 
-    beforeEach(function() {
+    beforeEach(function(done) {
         tech = BEMSmoke.testTech(require.resolve('../techs/browser.js+bemhtml.js'))
                        .withTechMap({
                            'bemhtml': require.resolve('../techs/bemhtml.js'),
@@ -44,7 +44,8 @@ describe('browser.js+bemhtml tech', function() {
                                'block.bemhtml.xjst': 'bemhtml'
                            }
                         })
-                       .build('/out', decl);
+                       .build('/out', decl)
+                       .notify(done);
     });
 
     it('produces concateneated js with ym chunk and appends compiled bemhtml to the bottom', function(done) {
