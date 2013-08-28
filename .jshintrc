@@ -11,6 +11,7 @@
     "strict": true,
     "trailing": true,
     "node": true,
-    "quotmark": "single"
+    "quotmark": "single",
+    "eqnull": true
 }
 
