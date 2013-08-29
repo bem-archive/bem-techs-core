@@ -19,13 +19,13 @@ describe('i18n tech', function() {
                 }
             }
         })
-        .build('block/block', decl)
+        .build('/out', decl)
         .notify(done);
     });
 
     it('creates all.js from languages files', function(done) {
         
-        tech.producesFile('block/block.i18n/all.js')
+        tech.producesFile('/out.i18n/all.js')
         .withContent(['(',
                       JSON.stringify({
                          ru: {
@@ -45,15 +45,15 @@ describe('i18n tech', function() {
     });
 
     it('does not invalidates when no files changed', function(done) {
-        tech.build('block/block', decl)
-            .notWritesToFile('/block/block.i18n/all.js')
+        tech.build('/out', decl)
+            .notWritesToFile('/out.i18n/all.js')
             .notify(done);
     });
 
     it('invalidates when one of the lang files changed', function(done) {
         tech.touchFile('/block/block.i18n/en.js')
-            .build('block/block', decl)
-            .writesToFile('/block/block.i18n/all.js')
+            .build('/out', decl)
+            .writesToFile('/out.i18n/all.js')
             .notify(done);
     });
 });
