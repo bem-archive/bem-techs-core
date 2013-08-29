@@ -19,7 +19,7 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         this.getLangs()
             .map(this.getBuildSuffixForLang, this).concat([this.getBaseTechSuffix()])
             .forEach(function(s) {
-                suffixes[s] = [this.getBaseTechSuffix(),'browser.js','vanilla.js','bemhtml'];
+                suffixes[s] = [this.getBaseTechSuffix(),'browser.js','vanilla.js','bemhtml', 'bemhtml.xjst'];
             }, this);
 
         return suffixes;
