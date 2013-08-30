@@ -57,16 +57,17 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         return lang + '.' + this.getBaseTechSuffix();
     },
 
-    getBuildPaths: function(decl, levels) {
-        var _this = this;
-        return Q.all([this.__base(decl, levels), QFS.lastModified(this._allJSPath)])
-                .spread(function(paths, allJSUpdate) {
+    getBuildPaths: function(decl, levels, output) {
+        var _this = this,
+            source = this.getPath(output, this.getSourceSuffix());
+        return Q.all([this.__base(decl, levels), QFS.lastModified(source).invoke('getTime')])
+                .spread(function(paths, sourceUpdate) {
                     Object.keys(paths).forEach(function(destSuffix) {
                         if (destSuffix !== _this.getBaseTechSuffix()) {
                             paths[destSuffix].push({
-                                absPath: _this._allJSPath,
+                                absPath: source,
                                 suffix: _this.getSourceSuffix(),
-                                lastUpdated: allJSUpdate.getTime()
+                                lastUpdated: sourceUpdate
                             });
                         }
                     });
@@ -80,7 +81,6 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         var _this = this,
             source = this.getPath(output, this.getSourceSuffix()),
             base = this.__base;
-        this._allJSPath = source;
         return BEM.util.readJsonJs(source)
             .then(function(data) {
                 opts = opts || {};

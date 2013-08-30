@@ -43,30 +43,17 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         return lang + '.' + this.getBaseTechSuffix();
     },
 
-    getBuildResults: function(decl, levels, output, opts) {
-        
+    getBuildPaths: function(decl, levels, output) {
         var _this = this,
-            source = this.getPath(output, this.getSourceSuffix()),
-            base = this.__base;
-
-        this._allJSPath = source;
-        return BEM.util.readJsonJs(source)
-            .then(function(data) {
-                _this._langData = data;
-                return base.call(_this, decl, levels, output, opts);
-            });
-    },
-
-    getBuildPaths: function(decl, levels) {
-        var _this = this;
-        return Q.all([this.__base(decl, levels), QFS.lastModified(this._allJSPath)])
-                .spread(function(paths, allJSUpdate) {
+            source = this.getPath(output, this.getSourceSuffix());
+        return Q.all([this.__base(decl, levels), QFS.lastModified(source).invoke('getTime')])
+                .spread(function(paths, sourceUpdate) {
                     Object.keys(paths).forEach(function(destSuffix) {
                         if (destSuffix !== _this.getBaseTechSuffix()) {
                             paths[destSuffix].push({
-                                absPath: _this._allJSPath,
+                                absPath: source,
                                 suffix: _this.getSourceSuffix(),
-                                lastUpdated: allJSUpdate.getTime()
+                                lastUpdated: sourceUpdate
                             });
                         }
                     });
@@ -75,26 +62,44 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
     },
 
 
+    getBuildResults: function(decl, levels, output, opts) {
+        var _this = this,
+            source = this.getPath(output, this.getSourceSuffix()),
+            base = this.__base;
+        return BEM.util.readJsonJs(source)
+            .then(function(data) {
+                opts = opts || {};
+                opts.ctx = {
+                    data: data
+                };
+
+                return base.call(_this, decl, levels, output, opts);
+
+            });
+    },
+
     getBuildResult: function(files, suffix, output, opts) {
         if (suffix === this.getBaseTechSuffix()) {
             return Q.resolve(output);
         }
 
-        this._lang = suffix.substr(0, 2);
-        return this.__base(files, suffix, output, opts);
+        var _this = this;
+        return this.__base.apply(this, arguments)
+            .then(function(res) {
+                var lang = suffix.substr(0, 2),
+                    dataLang = _this.extendLangDecl({}, opts.ctx.data.all || {});
+
+                dataLang = _this.extendLangDecl(dataLang, opts.ctx.data[suffix.substr(0, 2)] || {});
+
+                return res.concat(dataLang? _this.serializeI18nData(dataLang, lang) : [])
+                    .concat([_this.serializeI18nInit(lang)]);
+            });
 
     },
 
-    getBuildResultChunk: function (relPath, path, suffix) {
-        if (path === this._allJSPath) {
-            var dataLang = this.extendLangDecl({}, this._langData.all || {});
-
-            dataLang = this.extendLangDecl(dataLang, this._langData[this._lang] || {});
-            
-
-            return (dataLang? this.serializeI18nData(dataLang, this._lang) : [])
-                        .concat([this.serializeI18nInit(this._lang)])
-                        .join('');
+    getBuildResultChunk: function(relPath, path, suffix) {
+        if (suffix === this.getSourceSuffix()) {
+            return '';
         }
         return this.__base(relPath, path, suffix);
     },
