@@ -1,6 +1,7 @@
 'use strict';
 var BEM = require('bem'),
     Q = BEM.require('q'),
+    QFS = BEM.require('q-io/fs'),
     LangsMixin = require('./i18n').LangsMixin,
     I18NJS = require('../lib/i18n/i18n-js');
 
@@ -43,38 +44,59 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
     },
 
     getBuildResults: function(decl, levels, output, opts) {
+        
         var _this = this,
             source = this.getPath(output, this.getSourceSuffix()),
             base = this.__base;
 
+        this._allJSPath = source;
         return BEM.util.readJsonJs(source)
             .then(function(data) {
-                opts = opts || {};
-                opts.ctx = {
-                    data: data
-                };
-
+                _this._langData = data;
                 return base.call(_this, decl, levels, output, opts);
             });
     },
+
+    getBuildPaths: function(decl, levels) {
+        var _this = this;
+        return Q.all([this.__base(decl, levels), QFS.lastModified(this._allJSPath)])
+                .spread(function(paths, allJSUpdate) {
+                    Object.keys(paths).forEach(function(destSuffix) {
+                        if (destSuffix !== _this.getBaseTechSuffix()) {
+                            paths[destSuffix].push({
+                                absPath: _this._allJSPath,
+                                suffix: _this.getSourceSuffix(),
+                                lastUpdated: allJSUpdate.getTime()
+                            });
+                        }
+                    });
+                    return paths;
+                });
+    },
+
 
     getBuildResult: function(files, suffix, output, opts) {
         if (suffix === this.getBaseTechSuffix()) {
             return Q.resolve(output);
         }
 
-        var _this = this;
-        return this.__base.apply(this, arguments)
-            .then(function(res) {
-                var lang = suffix.substr(0, 2),
-                    dataLang = _this.extendLangDecl({}, opts.ctx.data.all || {});
+        this._lang = suffix.substr(0, 2);
+        return this.__base(files, suffix, output, opts);
 
-                dataLang = _this.extendLangDecl(dataLang, opts.ctx.data[suffix.substr(0, 2)] || {});
+    },
 
-                return res.concat(dataLang? _this.serializeI18nData(dataLang, lang) : [])
-                    .concat([_this.serializeI18nInit(lang)]);
-            });
+    getBuildResultChunk: function (relPath, path, suffix) {
+        if (path === this._allJSPath) {
+            var dataLang = this.extendLangDecl({}, this._langData.all || {});
 
+            dataLang = this.extendLangDecl(dataLang, this._langData[this._lang] || {});
+            
+
+            return (dataLang? this.serializeI18nData(dataLang, this._lang) : [])
+                        .concat([this.serializeI18nInit(this._lang)])
+                        .join('');
+        }
+        return this.__base(relPath, path, suffix);
     },
 
     serializeI18nInit: I18NJS.serializeInit,

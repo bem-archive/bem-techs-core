@@ -100,7 +100,7 @@ describe('i18n.browser.js+bemhtml.js tech', function() {
             .notify(done);
     });
 
-    it.skip('invalidates when i18n source changed', function(done) {
+    it('invalidates when i18n source changed', function(done) {
         tech.touchFile('/out.i18n/all.js')
             .build('/out', decl)
             .writesToFile('/out.en.js')

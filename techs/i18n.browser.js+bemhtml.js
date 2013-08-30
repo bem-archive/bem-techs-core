@@ -1,6 +1,7 @@
 'use strict';
 var BEM = require('bem'),
     Q = BEM.require('q'),
+    QFS = BEM.require('q-io/fs'),
     LangsMixin = require('./i18n').LangsMixin,
     Deps = require('bem/lib/techs/v2/deps.js').Deps,
     I18NJS = require('../lib/i18n/i18n-js');
@@ -56,11 +57,30 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         return lang + '.' + this.getBaseTechSuffix();
     },
 
+    getBuildPaths: function(decl, levels) {
+        var _this = this;
+        return Q.all([this.__base(decl, levels), QFS.lastModified(this._allJSPath)])
+                .spread(function(paths, allJSUpdate) {
+                    Object.keys(paths).forEach(function(destSuffix) {
+                        if (destSuffix !== _this.getBaseTechSuffix()) {
+                            paths[destSuffix].push({
+                                absPath: _this._allJSPath,
+                                suffix: _this.getSourceSuffix(),
+                                lastUpdated: allJSUpdate.getTime()
+                            });
+                        }
+                    });
+                    return paths;
+                });
+    },
+
+
     getBuildResults: function(decl, levels, output, opts) {
         
         var _this = this,
             source = this.getPath(output, this.getSourceSuffix()),
             base = this.__base;
+        this._allJSPath = source;
         return BEM.util.readJsonJs(source)
             .then(function(data) {
                 opts = opts || {};

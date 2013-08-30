@@ -56,7 +56,7 @@ describe('i18n.node.js tech', function(done) {
             .notify(done);
     });
 
-    it.skip('invlidates when i18n files changed', function(done) {
+    it('invlidates when i18n files changed', function(done) {
         tech.touchFile('/out.i18n/all.js')
             .build('/out', decl)
             .writesToFile('/out.en.node.js')

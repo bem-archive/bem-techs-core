@@ -34,7 +34,7 @@ describe('i18n.browser.js tech', function(done) {
         .notify(done);
     });
 
-    it('builds browser.js with appended i18n keys', function(done) {
+    it('builds <lang>.browser.js with appended i18n keys', function(done) {
         tech.producesFile('/out.en.js')
         .withContent('/* ym/ym.js: begin */ /**/',
                      '//ym chunk;',
@@ -60,8 +60,8 @@ describe('i18n.browser.js tech', function(done) {
             .notify(done);
     });
 
-    it.skip('invlidates when i18n files changed', function(done) {
-        tech.touchFile('block/block.i18n/all.js')
+    it('invlidates when i18n files changed', function(done) {
+        tech.touchFile('/out.i18n/all.js')
             .build('/out', decl)
             .writesToFile('out.en.js')
             .notify(done);
