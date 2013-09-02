@@ -1,6 +1,6 @@
 {
   "name": "bem-techs-core",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Core bem tech modules",
   "main": "index.js",
   "contributors": [
@@ -29,7 +29,7 @@
     "mocha": "~1.12.0",
     "chai": "~1.7.2",
     "bem-smoke": "~0.3.0",
-    "bem": "git://github.com/bem/bem-tools.git#77d56dd93e94",
+    "bem": "~1.0.0-alpha4",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
     "jshint": "~2.1.10"
