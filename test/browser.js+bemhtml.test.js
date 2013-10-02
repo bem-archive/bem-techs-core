@@ -14,7 +14,43 @@ describe('browser.js+bemhtml tech', function() {
                     {block: 'block', tech: 'bemhtml'}
                 ]
             }
-        ]
+        ],
+        depsFull: {
+            '':{
+                shouldDeps:[
+                    'block',
+                    'block.js',
+                    'block.bemhtml'
+                ],
+                mustDeps:[]
+            },
+            'block':{
+                shouldDeps:[],
+                mustDeps:[],
+                item:{
+                    block:'block',
+                    key:'block'
+                }
+            },
+            'block.js':{
+                shouldDeps:['block.bemhtml'],
+                mustDeps:[],
+                item:{
+                    block:'block',
+                    tech:'js',
+                    key:'block.js'
+                }
+            },
+            'block.bemhtml':{
+                shouldDeps:[],
+                mustDeps:[],
+                item:{
+                    block:'block',
+                    tech:'bemhtml',
+                    key:'block.bemhtml'
+                }
+            }
+        }
     };
 
     beforeEach(function(done) {

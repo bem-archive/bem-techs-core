@@ -38,21 +38,6 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         return suffixes;
     },
 
-    transformBuildDecl: function(decl) {
-        var ss = this.getWeakSuffixesMap();
-
-        return decl
-            .then(function(decl){
-                var deps = new Deps().parseDepsDecl(decl)
-                    .filter(function(dependson, dependent) {
-                        return ((dependson.item.tech in ss) || (!dependson.item.tech && !dependent.item.tech));
-                    }).map(function(item){
-                        return item.item;
-                    });
-                return {deps: deps};
-            });
-    },
-
     getBuildSuffixForLang: function(lang) {
         return lang + '.' + this.getBaseTechSuffix();
     },
@@ -74,7 +59,6 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
                     return paths;
                 });
     },
-
 
     getBuildResults: function(decl, levels, output, opts) {
         

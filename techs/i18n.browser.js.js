@@ -17,6 +17,12 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
     getWeakBuildSuffixesMap: function() {
         var suffixes = {};
+        // would be something like
+        // {
+        //     'js': ['js','browser.js','vanilla.js'],
+        //     'en.js': ['js','browser.js','vanilla.js'],
+        //     'ru.js': ['js','browser.js','vanilla.js']
+        // }
 
         this.getLangs()
             .map(this.getBuildSuffixForLang, this).concat([this.getBaseTechSuffix()])
