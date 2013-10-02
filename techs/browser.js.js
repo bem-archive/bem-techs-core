@@ -1,6 +1,5 @@
 'use strict';
 
-var dbg = 0;
 var PATH = require('path'),
     BEM = require('bem'),
     Q = BEM.require('q'),
@@ -61,7 +60,6 @@ exports.techMixin = {
                 keys.forEach(function(key){
                     if(!uniq[buildTech][key]){
                         uniq[buildTech][key] = 1;
-dbg && console.log('(walk',key);
                         var item = depsGraph.items[key];
                         var itemTech = item.item.tech;
                         if(!itemTech){
@@ -74,14 +72,11 @@ dbg && console.log('(walk',key);
                             } else {
                                 // skip item
 
-dbg && console.log('(skip)');
                                 if(itemTech in adjacentRoots){
-dbg && console.log('(roots-push',key,')')
                                     adjacentRoots[itemTech].push(item)
                                 }
                             }
                         }
-dbg && console.log(')');
                     }
                 })
             }
@@ -94,7 +89,6 @@ dbg && console.log(')');
                 delete item1.key;
                 item1.item.tech = buildTech;
                 var key1 = item1.buildKey();
-dbg && console.log('(walk-wild',key)
                 if(depsGraph.items[key1] && !uniq[buildTech][key1]){
                     uniq[buildTech][key1] = 2;
                     __walk1t(key1, buildTech);
@@ -103,7 +97,6 @@ dbg && console.log('(walk-wild',key)
                     uniq[buildTech][key] = 2;
                     __walk1$(key, buildTech);
                 }
-dbg && console.log(')');
             }
             
             function _walk1t(key, buildTech){
@@ -114,7 +107,6 @@ dbg && console.log(')');
                 delete item1.key;
                 delete item1.item.tech;
                 var key1 = item1.buildKey();
-dbg && console.log('(walk-tech',key);
                 if(!uniq[buildTech][key] === 1){
                     uniq[buildTech][key] = 2;
                     __walk1t(key, buildTech);
@@ -123,7 +115,6 @@ dbg && console.log('(walk-tech',key);
                     uniq[buildTech][key1] = 2;
                     __walk1$(key1, buildTech);
                 }
-dbg && console.log(')');
             }
 
             function __walk1$(key, buildTech){
@@ -156,7 +147,6 @@ dbg && console.log(')');
                     if(!uniq[''][key]){
                         uniq[''][key] = 1;
                         items.push(item.item);
-dbg && console.log('(include',key,')');
                     }
                 }
             }
