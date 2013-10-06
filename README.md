@@ -20,7 +20,7 @@ A set of core technology modules not included in [bem-tools](https://github.com/
 1.  Install via `npm`:
 
     ```
-    npm install bem-core-techs
+    npm install bem-techs-core
     ```
 2.  Configure your `level.js` to use technologies from a package:
 
